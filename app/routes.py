@@ -3,6 +3,12 @@ from app import app, db
 from app.models import Restaurant, Pizza, RestaurantPizza
 
 
+
+@app.route('/', methods= ['GET'])
+def index():
+    return '<h1>"message": "This is pizza api" </h1>'
+
+
 @app.route('/restaurants', methods=['GET'])
 def get_restaurants():
     restaurants = Restaurant.query.all()
@@ -57,14 +63,5 @@ def create_restaurant_pizza():
     pizza_id = data.get('pizza_id')
     restaurant_id = data.get('restaurant_id')
     
-    # validate data and create the RestaurantPizza
-    if price and 1 <= price <= 30 and pizza_id and restaurant_id:
-        restaurant_pizza = RestaurantPizza(price=price, pizza_id=pizza_id, restaurant_id=restaurant_id)
-        db.session.add(restaurant_pizza)
-        db.session.commit()
-        return jsonify({
-            "id": restaurant_pizza.pizza.id,
-            "name": restaurant_pizza.pizza.name,
-            "ingredients": restaurant_pizza.pizza.ingredients
-        }), 201
-    return jsonify({"errors": ["Validation errors"]}), 400
+
+    
