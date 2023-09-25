@@ -3,7 +3,7 @@ from app import app, db
 
 manager = Manager(app)
 
-
+app = create_app()
 
 @manager.command
 def run():
